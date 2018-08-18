@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Modelling Excitable Media</title>
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Modelling Excitable Media</h1>
+      <p class="subtitle">with Cellular Automata</p>
+      <section>
+        <figure id="figure-1">
+          <p class="figure-title">Fig. 1: Self-organization of spiral waves from a randomly configured, two-dimensional, cyclic cellular automaton</p>
+          <canvas height="120px" width="600px" class="cca-model"></canvas>
+        </figure>
+        <p class="description">
+          An <dfn>excitable medium</dfn> is a non-linear dynamical system which has the capacity to propagate a wave and cannot support the passing of another wave until a refractory period has elapsed.
+        </p>
+        <p class="description">
+          A forest is an example of an excitable medium:
+        </p>
+        <ul>
+          <li>
+            <p class="description">
+              while temperatures are below the autoignition threshold, vegetation will not ignite
+            </p>
+          </li>
+          <li>
+            <p class="description">
+              with temperatures above the autoignition threshold, the combustion process begins, heat sufficient to ignite nearby areas is released, and combustion fronts are created
+            </p>
+          </li>
+          <li>
+            <p class="description">
+              after a refractory period in which vegetation regrows, the vegetation becomes combustable again
+            </p>
+          </li>
+        </ul>
+        <p class="description">
+          Spectators at a sporting event may be an excitable medium for <a href="https://en.wikipedia.org/wiki/Wave_(audience)">"Mexican waves,"</a> and in chemistry, excitable media support chemical clocks like the <a href="https://www.youtube.com/watch?v=PpyKSRo8Iec">Belousov-Zhabotinsky</a> and <a href="https://en.wikipedia.org/wiki/Briggs%E2%80%93Rauscher_reaction">Briggs-Rauscher</a> reactions.
+        </p>
+        <p class="description">
+          <dfn>Autowaves</dfn> are self-sustaining, non-linear wave processes arising in non-equilibrium environments.  Examples of autowaves in excitable media include: excitation pulses along nerve fibers, arrhythmias in myocardium, chemical signalling in certain microorganism colonies, autowaves in ferroelectric and semiconductor films, population waves, the spread of epidemics, and the spread of genes.  The emergent <a href="https://en.wikipedia.org/wiki/Spiral_wave">spiral waves</a> depicted in <a href="#figure-1">Figure 1</a> are yet another example.
+        </p>
+        <p class="description">
+          Numerous mathematical and computational models simulate autowaves in excitable media: <a href="https://www.ncbi.nlm.nih.gov/pubmed/20245817">Wiener-Rosenblueth</a>, <a href="https://en.wikipedia.org/wiki/FitzHugh%E2%80%93Nagumo_model">FitzHugh-Nagumo</a>, <a href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model">Hodgkin-Huxley</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/874889">Beeler-Reuter</a>, <a href="https://www.sciencedirect.com/science/article/pii/0960077995000895">Aliev-Panfilov</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/12779708">Fenton-Karma</a>, and <a href="https://en.wikipedia.org/wiki/Denis_Noble">Denis Noble's</a> myocardial models. The focus here, however, will be on two simple cellular automata: the Greenberg-Hastings automaton and cyclic cellular automata.
+        </p>
+        <p class="description">
+          Imagine a two-dimensional lattice composed of cells, and each cell of the lattice is painted one of <i>&kappa;</i> colors.  The colors are arranged along a <a href="https://en.wikipedia.org/wiki/Color_wheel">color wheel</a>, and the colors advance (<i>k</i> to <i>k</i> + 1 mod <i>&kappa;</i>) by contact with at least a threshold <i>&theta;</i> number of successor colors in a prescribed local neighborhood (typically either a <a href="https://en.wikipedia.org/wiki/Von_Neumann_neighborhood">von Neumann</a> neighborhood or a <a href="https://en.wikipedia.org/wiki/Moore_neighborhood">Moore</a> neighborhood) of some extent <i>&rho;</i>.  Discrete-time parallel systems of this sort are called <dfn>cyclic cellular automata</dfn> (CCA). Initialized in random configurations, these rules exhibit complex self-organization, typically characterized by nucleation of locally periodic spirals and a variety of equilibria that display large-scale stochastic wave fronts. These characteristics are evident in <a href="#figure-1">Figure 1</a>, which depicts a CCA parameterized by <i>&rho;</i>=1D, <i>&theta;</i>=1, and <i>&kappa;</i>=14. CCA emulate the behavior of a wide range of complex, coherent, periodic wave phenomena in space.
+        </p>
+        <p class="description">
+          The <dfn>Greenberg-Hastings</dfn> (GH) automaton is a simpler version of CCA.  Under the GH rules, only one color advances by contact with at least a threshold <i>&theta;</i> number of successor colors in its local neighborhood <i>&rho;</i>, and all other colors advance automatically.  The simplest GH model is the automaton with three states, or colors (<i>&kappa;</i>=3): resting, excited, refractory.  If a resting cell is in contact with an excited cell, it will become excited on the next time-step; otherwise, it will remain at rest.  Once excited, it proceeds automatically through the refractory states until it returns again to a state of rest.
+        </p>
+        <p class="description">
+          Both CCA and GH automata are parameterized by three variables: the neighborhood <i>&rho;</i>, the number of states <i>&kappa;</i>, and the threshold <i>&theta;</i>.  The following interactive model allows you to experiment with different settings for each parameter, and it allows you to toggle between GH models and CCA.
+        </p>
+        <figure id="figure-2">
+          <p class="figure-title">Fig. 2: Small-scale and large-scale configurable automata</p>
+          <div class="interactive-model">
+            <div class="zoomed-in"></div>
+            <canvas height="150px" width="295px" class="zoomed-out"></canvas>
+          </div>
+          <form class="controls"></form>
+        </figure>
+      </section>
+    </div>
+  </body>
+  <script type="text/javascript" src="/public/javascripts/namespace.js"></script>
+  <script type="text/javascript" src="/public/javascripts/utilities/neighborhoods.js"></script>
+  <script type="text/javascript" src="/public/javascripts/utilities/rules.js"></script>
+  <script type="text/javascript" src="/public/javascripts/models/cellular_automata.js"></script>
+  <script type="text/javascript" src="/public/javascripts/views/canvas.js"></script>
+  <script type="text/javascript" src="/public/javascripts/views/lattice.js"></script>
+  <script type="text/javascript" src="/public/javascripts/views/controls.js"></script>
+  <script type="text/javascript" src="/public/javascripts/app.js"></script>
+</html>
